@@ -1,5 +1,9 @@
 from selenium import webdriver
 from behave import *
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import IEDriverManager
+from webdriver_manager.opera import OperaDriverManager
 import page
 
 
@@ -7,13 +11,14 @@ import page
 def setUp(context, browser):
     global driver
     if 'ie' in browser.lower():
-        driver = webdriver.Ie()
+        driver = webdriver.Ie(IEDriverManager().install())
     elif 'firefox' in browser.lower():
-        driver = webdriver.Firefox()
-    elif 'edge' in browser.lower():
-        driver = webdriver.Edge()
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    elif 'opera' in browser.lower():
+        driver = webdriver.Opera(executable_path=OperaDriverManager().install())
     else:
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver.implicitly_wait(5)
     driver.get("https://stonepayments.typeform.com/to/yl5PKW")
     pass
 
