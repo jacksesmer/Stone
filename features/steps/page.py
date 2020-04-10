@@ -11,7 +11,7 @@ class BasePage(object):
 class MainPage(BasePage):
 
     def is_title_matches(self):
-        """Verifies that the hardcoded text "Python" appears in page title"""
+        """Verifies that the hardcoded text "Registration" appears in page title"""
         return "Registration" in self.driver.title
 
     def click_go_button(self, name):
@@ -22,6 +22,8 @@ class MainPage(BasePage):
         self.driver.implicitly_wait(10)
         element_form = self.driver.find_element(By.ID, id)
         self.driver.implicitly_wait(10)
+        self.driver.execute_script("arguments[0].focus();", element_form)
+        self.driver.implicitly_wait(10)
         element_form.send_keys(text)
         element_form.send_keys(Keys.ENTER)
 
@@ -30,6 +32,7 @@ class MainPage(BasePage):
         element_form = self.driver.find_element(By.ID, id)
         self.driver.implicitly_wait(20)
         self.driver.execute_script("arguments[0].focus();", element_form)
+        self.driver.implicitly_wait(10)
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         element_form.send_keys(text)
         self.driver.implicitly_wait(20)
