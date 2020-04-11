@@ -12,4 +12,7 @@ You can use requirements txt to install libs with command:
 
 Run the command ***behave --junit*** in the path Stone (prompt) to execute the test.
 
-The status of test appear in prompt
+The status of test appear in prompt.
+
+Should appear a report path with result of test in xml.
+
