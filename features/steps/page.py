@@ -18,7 +18,7 @@ class MainPage(BasePage):
         element_button = self.driver.find_element(By.XPATH, "//*[@data-qa='{0}']".format(name))
         self.driver.execute_script("arguments[0].click();", element_button)
 
-    def fill_form(self, text, id):
+    def fill_form(self, text, id, type):
         self.driver.implicitly_wait(10)
         element_form = self.driver.find_element(By.ID, id)
         self.driver.implicitly_wait(10)
@@ -26,14 +26,22 @@ class MainPage(BasePage):
         self.driver.implicitly_wait(10)
         element_form.send_keys(text)
         element_form.send_keys(Keys.ENTER)
+        if type == 'error':
+            self.driver.find_element(By.XPATH, '//*[@id="block-01E0CZKHBBJRN4RP11HBPARBTY"]/div/div/div/div/div/div[2]/div/div/div[2]/div[1]')
 
-    def list_select(self, text, id):
+
+    def list_select(self, text, id, type):
         self.driver.implicitly_wait(10)
         element_form = self.driver.find_element(By.ID, id)
         self.driver.implicitly_wait(20)
         self.driver.execute_script("arguments[0].focus();", element_form)
         self.driver.implicitly_wait(10)
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        element_form.send_keys(text)
+        if text:
+            element_form.send_keys(text)
         self.driver.implicitly_wait(20)
         element_form.send_keys(Keys.ENTER)
+        if type == 'error':
+            self.driver.find_element(By.XPATH,
+                                     '//*[@id="block-01E0CZKHBBJRN4RP11HBPARBTY"]/div/div/div/div/div/div[2]/div/div/div[2]/div[1]')
+            pass
